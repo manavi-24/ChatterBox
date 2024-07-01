@@ -1,32 +1,37 @@
 import NewPost from "./NewPost";
 import Post from "./Post";
-import classes from './PostList.module.css';
-import {useState} from 'react';
-import Modal from './Modal';
-function PostList(){
-    const[enteredText, setEnteredText] = useState('');
-    const[enteredName, setEnteredName] = useState('');
-    const[modalIsVisible, setModalIsVisible] = useState(true);
-    function handleChangeText(event){
-        setEnteredText(event.target.value);
-    }
-    function handleChangeName(event){
-        setEnteredName(event.target.value);
-    }
-    function handleOnClose(){
-        setModalIsVisible(false);
-    }
-    return (
-        <>
-        {modalIsVisible &&
-        (<Modal onClose={handleOnClose}>
-        <NewPost changeText={handleChangeText} changeName={handleChangeName}/>
-        </Modal>)}
+import classes from "./PostList.module.css";
+import { useState } from "react";
+import Modal from "./Modal";
+function PostList({ isPosting, onStopPosting }) {
+  const [posts, setPosts] = useState([]);
+  function addPostHandler(postData) {
+    setPosts((prevPosts) => {
+      return [postData, ...prevPosts];
+    });
+  }
+
+  return (
+    <>
+      {isPosting && (
+        <Modal onClose={onStopPosting}>
+          <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
+        </Modal>
+      )}
+      {posts.length > 0 && (
         <ul className={classes.posts}>
-        <Post name="Manavi" body="Hi, I am a writer" />
-        <Post name={enteredName} body={enteredText} />
+          {posts.map((post) => (
+            <Post name={post.name} text={post.text} />
+          ))}
         </ul>
-        </>
-    );
+      )}
+      {posts.length === 0 && (
+        <div style={{ textAlign: "center", color: "white" }}>
+          <h2>There are no posts yet.</h2>
+          <p>Start adding some!</p>
+        </div>
+      )}
+    </>
+  );
 }
 export default PostList;
