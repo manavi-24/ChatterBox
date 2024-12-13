@@ -40,16 +40,33 @@
     border-radius: 4px;
     background-color: #34036c;
     color: #e5d5f7;
+
   }
-  
+  .btn{
+    text-decoration: none;
+    color: #e5d5f7;
+  }
+  .btn:hover{
+    color: #d1bee6;
+  }
   .actions button:hover {
     background-color: #23014a;
+    text-decoration: none;
   }
   
   .actions button[type='button'] {
     background-color: transparent;
+    text-decoration: none;
+    color: #e5d5f7;
+    
+  }
+  .actions button[type='button']:active {
+      color: #b5a5c6;
+   
   }
   
   .actions button[type='button']:hover {
-    color: #d1bee6;
+    
+    text-decoration: none;
   }
+ 
