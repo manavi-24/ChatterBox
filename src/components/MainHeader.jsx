@@ -7,7 +7,7 @@ function MainHeader() {
     <header className={classes.header}>
       <h1 className={classes.logo}>
         <MdMessage />
-        React Poster
+        Chatter Box
       </h1>
       <p>
         <Link className={classes.button} to='/create-post'>
